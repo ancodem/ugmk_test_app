@@ -4,6 +4,11 @@ export type Product = `product${1 | 2 | 3}`;
 
 export type Month = typeof MONTHS[number];
 
+export enum Status {
+  Full = "Filled",
+  Empty = "Empty"
+}
+
 export type VictoryDatum = {
   datum: { _xName: Month;
   factoryId: number }

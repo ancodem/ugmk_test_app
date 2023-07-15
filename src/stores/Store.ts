@@ -1,10 +1,11 @@
+import { Statistic } from "antd";
 import {
   action,
   makeObservable,
   observable,
 } from "mobx";
 import { MONTHS } from "../constants";
-import { FactoryAxisData, FactoryData, Product } from "../types";
+import { FactoryAxisData, FactoryData, Product, Status } from "../types";
 
 const API = {
   fetch: `${process.env.REACT_APP_API_URL}/products`
@@ -12,6 +13,7 @@ const API = {
 
 class BaseStore {
   data: FactoryData[] = observable.array([]);
+  private status: Status = Status.Empty;
 
   constructor() {
     makeObservable(this, {
@@ -34,11 +36,11 @@ class BaseStore {
 
       arr[index] = {
         ...arr[index],
-        y: arr[index].y + (filtered[i][type] / 1000),
+        y: arr[index].y + filtered[i][type] / 1000,
       }
     }
 
-    return arr;
+    return arr
   }
 
   private validateAndStore = (arr: FactoryData[]) => {
@@ -50,10 +52,13 @@ class BaseStore {
   }
 
   public fetchInfo = async () => {
+    if (this.status === Status.Full) return;
+
     try {
       const resp = await fetch(API.fetch);
       const info: FactoryData[] = await resp.json();
       this.validateAndStore(info);
+      this.status = Status.Full;
     } catch (err) {
       console.log(err);
     }
