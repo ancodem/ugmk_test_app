@@ -36,7 +36,7 @@ class BaseStore {
 
       arr[index] = {
         ...arr[index],
-        y: arr[index].y + filtered[i][type],
+        y: arr[index].y + (filtered[i][type] / 1000),
       }
     }
 

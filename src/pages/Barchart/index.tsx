@@ -2,6 +2,7 @@ import { Col, Layout, Row, Select, Space, Typography } from "antd";
 import { observer, Observer } from "mobx-react";
 import React, { FC, SyntheticEvent, useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { VictoryLegend } from "victory";
 import BarChart from "../../components/barshart";
 import { BAR, MONTHS, OPTIONS } from "../../constants";
 import Store from "../../stores/Store";
@@ -48,7 +49,7 @@ const BarChartPage: FC = () => {
     }, [navigate]);
 
   return (
-    <Layout style={{ minHeight: "100vh" }}>
+    <Layout style={{ minHeight: "100vh", maxHeight: "100%" }}>
       <Row style={{ marginTop: "20px" }}>
         <Col span={20} offset={4} flex="start">
           <Space style={{ border: "solid 1px black", padding: "10px", borderRadius: "10px", width: "80%" }}>
@@ -63,10 +64,11 @@ const BarChartPage: FC = () => {
       </Row>
       <Row style={{ width: "80%", marginTop: "20px" }}>
         <Col span={20} offset={5} >
-          <Content style={{ margin: "10px auto", minHeight: "80%", minWidth: "100%", border: "solid 1px black", padding: "10px", borderRadius: "10px" }}>
+          <Content style={{ margin: "20px auto", minHeight: "80%", minWidth: "100%", border: "solid 1px black", padding: 0, borderRadius: "10px" }}>
             <Observer>
               {() => (
                 <BarChart
+                  height={BAR.HEIGHT}
                   onClick={handleBarClick}
                   data={getData(selection)}
                   barWidth={BAR.WIDTH}
@@ -76,6 +78,18 @@ const BarChartPage: FC = () => {
                 />
               )}
             </Observer>
+            <Row style={{ position: "relative", top: "-25px" }}>
+              <Col span={12} offset={7} >
+                <VictoryLegend
+                  orientation="horizontal"
+                  height={40}
+                  gutter={50}
+                  style={{ labels: { fontSize: 25 } }}
+                  colorScale={BAR.COLORS}
+                  data={[{ name: "Фабрика А", symbol: { type: "square" } }, { name: "Фабрика Б", symbol: { type: "square" } }]}
+                />
+              </Col>
+            </Row>
           </Content>
         </Col>
       </Row>

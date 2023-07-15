@@ -8,6 +8,7 @@ export const OPTIONS: { value: Product; label: string }[] = [
 
 export const BAR = {
   WIDTH: 10,
+  HEIGHT: 250,
   GAP: 13,
   COLORS: ["red", "blue"],
   COUNT: 2,
