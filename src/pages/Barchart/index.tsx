@@ -1,21 +1,24 @@
 import { Col, Layout, Row, Select, Space, Typography } from "antd";
 import { observer, Observer } from "mobx-react";
-import React, { FC, useCallback, useEffect, useState } from "react";
+import React, { FC, SyntheticEvent, useCallback, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import BarChart from "../../components/barshart";
-import { BAR, OPTIONS } from "../../constants";
+import { BAR, MONTHS, OPTIONS } from "../../constants";
 import Store from "../../stores/Store";
-import { Product } from "../../types";
+import { Product, VictoryDatum } from "../../types";
 import { getStoredSelection } from "../../utils";
 
 const { Content } = Layout;
 
 const BarChartPage: FC = () => {
+  const navigate = useNavigate();
+
   const [selection, setSelection] = useState<Product>(getStoredSelection());
   const { fetchInfo, getSortedBy } = Store;
 
   useEffect(() => {
     fetchInfo();
-  }, []);
+  });
 
   const handleChange = useCallback((value: Product) => {
     setSelection(value);
@@ -33,6 +36,16 @@ const BarChartPage: FC = () => {
 
     return arr;
   }, [getSortedBy]);
+
+  const handleBarClick = useCallback(
+    <T extends VictoryDatum>(_e: SyntheticEvent, data: T) => {
+      if (!data.datum) return;
+
+      const { factoryId, _xName: month } = data.datum;
+      const monthAsNumber = MONTHS.findIndex(elem => elem === month) + 1;
+
+      navigate(`/details/${factoryId}/${monthAsNumber}`);
+    }, [navigate]);
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
@@ -56,13 +69,13 @@ const BarChartPage: FC = () => {
             <Observer>
               {() => (
                 <BarChart
+                  onClick={handleBarClick}
                   data={getData(selection)}
                   barWidth={BAR.WIDTH}
                   barCount={BAR.COUNT}
                   barGap={BAR.GAP}
                   colors={BAR.COLORS}
                   categories={["jan", "feb"]}
-                  onClick={() => alert("click")}
                 />
               )}
             </Observer>
