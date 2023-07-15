@@ -22,7 +22,6 @@ const BarChart: FC<Props> = ({
   barGap = 10,
 }) => {
 
-  console.log(data)
   return (
     <VictoryChart
       domainPadding={20}

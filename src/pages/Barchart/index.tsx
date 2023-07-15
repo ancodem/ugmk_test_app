@@ -1,10 +1,10 @@
 import { Col, Layout, Row, Select, Space, Typography } from "antd";
 import { observer, Observer } from "mobx-react";
-import React, { FC, useCallback, useEffect, useMemo, useState } from "react";
+import React, { FC, useCallback, useEffect, useState } from "react";
 import BarChart from "../../components/barshart";
 import { BAR, OPTIONS } from "../../constants";
 import Store from "../../stores/Store";
-import { FactoryData, Product } from "../../types";
+import { Product } from "../../types";
 import { getStoredSelection } from "../../utils";
 
 const { Content } = Layout;
