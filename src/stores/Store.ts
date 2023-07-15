@@ -22,14 +22,9 @@ class BaseStore {
     });
   }
 
-  private getMonthFrom(data: FactoryData) {
-    return MONTHS[+data.date.split("/")[1]]
-  }
-
   public getSortedBy = (type: Product, id: number) => {
-    const arr: FactoryAxisData[] = Array.from({ length: 12 }, (_, index) => ({y: 0, x: MONTHS[index]}))
+    const arr: FactoryAxisData[] = Array.from({ length: 12 }, (_, index) => ({y: 0, x: MONTHS[index], factoryId: id}))
     const filtered = this.data.filter(i => i.factory_id === id)
-    console.log(filtered)
 
     for (let i = 0; i < filtered.length; i++) {
       const index = +filtered[i].date.split("/")[1] - 1;
