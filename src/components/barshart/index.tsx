@@ -1,10 +1,9 @@
 import { observer } from "mobx-react";
 import React, { FC, SyntheticEvent } from "react";
-import { VictoryBar, VictoryChart, VictoryContainer, VictoryGroup, VictoryLabel, VictoryTheme } from "victory";
+import { VictoryBar, VictoryChart, VictoryContainer, VictoryGroup } from "victory";
 import { FactoryAxisData, VictoryDatum } from "../../types";
 
 type Props = {
-  categories: string[];
   onClick: <T extends VictoryDatum>(_e: SyntheticEvent, data: T) => void;
   data: FactoryAxisData[][]
   barCount: number;
@@ -14,7 +13,6 @@ type Props = {
 }
 
 const BarChart: FC<Props> = ({
-  categories,
   data,
   colors,
   onClick,
@@ -29,8 +27,9 @@ const BarChart: FC<Props> = ({
     >
       <VictoryGroup
         colorScale={colors}
-        offset={barGap}>
-        {Array.from({ length: barCount }, (_, index) => index + 1).map((_, index) => (
+        offset={barGap}
+      >
+        {[...Array.from(Array(barCount).keys())].map((_, index) => (
           <VictoryBar
             labels={({ datum }) => datum.factory_id}
             key={index}

@@ -38,10 +38,10 @@ const BarChartPage: FC = () => {
   }, [getSortedBy]);
 
   const handleBarClick = useCallback(
-    <T extends VictoryDatum>(_e: SyntheticEvent, data: T) => {
-      if (!data.datum) return;
+    <T extends VictoryDatum>(_e: SyntheticEvent, { datum }: T) => {
+      if (!datum) return;
 
-      const { factoryId, _xName: month } = data.datum;
+      const { factoryId, _xName: month } = datum;
       const monthAsNumber = MONTHS.findIndex(elem => elem === month) + 1;
 
       navigate(`/details/${factoryId}/${monthAsNumber}`);
@@ -52,9 +52,7 @@ const BarChartPage: FC = () => {
       <Row style={{ marginTop: "20px" }}>
         <Col span={20} offset={4} flex="start">
           <Space style={{ border: "solid 1px black", padding: "10px", borderRadius: "10px", width: "80%" }}>
-            <Typography>
-              Фильтр по типу продукции
-            </Typography>
+            <Typography> Фильтр по типу продукции </Typography>
             <Select
               defaultValue={selection}
               onChange={handleChange}
@@ -75,7 +73,6 @@ const BarChartPage: FC = () => {
                   barCount={BAR.COUNT}
                   barGap={BAR.GAP}
                   colors={BAR.COLORS}
-                  categories={["jan", "feb"]}
                 />
               )}
             </Observer>

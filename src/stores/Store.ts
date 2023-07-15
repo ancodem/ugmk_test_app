@@ -22,8 +22,13 @@ class BaseStore {
     });
   }
 
+
   public getSortedBy = (type: Product, id: number) => {
-    const arr: FactoryAxisData[] = Array.from({ length: 12 }, (_, index) => ({y: 0, x: MONTHS[index], factoryId: id}))
+    const arr: FactoryAxisData[] = Array.from(
+      { length: 12, },
+      (_, index) => ({ y: 0, x: MONTHS[index], factoryId: id })
+    );
+
     const filtered = this.data.filter(i => i.factory_id === id)
 
     for (let i = 0; i < filtered.length; i++) {
