@@ -26,16 +26,18 @@ class BaseStore {
     return MONTHS[+data.date.split("/")[1]]
   }
 
-  public getSortedBy = (type: Product) => {
+  public getSortedBy = (type: Product, id: number) => {
     const arr: FactoryAxisData[] = Array.from({ length: 12 }, (_, index) => ({y: 0, x: MONTHS[index]}))
-    for (let i = 0; i < this.data.length; i++) {
-      const index = +this.data[i].date.split("/")[1] - 1
+    const filtered = this.data.filter(i => i.factory_id === id)
+    console.log(filtered)
+
+    for (let i = 0; i < filtered.length; i++) {
+      const index = +filtered[i].date.split("/")[1] - 1;
 
       arr[index] = {
         ...arr[index],
-        y: arr[index].y + this.data[i][type],
+        y: arr[index].y + filtered[i][type],
       }
-
     }
 
     return arr;

@@ -1,6 +1,6 @@
 import { Col, Layout, Row, Select, Space, Typography } from "antd";
 import { observer, Observer } from "mobx-react";
-import React, { FC, useCallback, useEffect, useState } from "react";
+import React, { FC, useCallback, useEffect, useMemo, useState } from "react";
 import BarChart from "../../components/barshart";
 import { BAR, OPTIONS } from "../../constants";
 import Store from "../../stores/Store";
@@ -12,7 +12,6 @@ const { Content } = Layout;
 const BarChartPage: FC = () => {
   const [selection, setSelection] = useState<Product>(getStoredSelection());
   const { fetchInfo, getSortedBy } = Store;
-  const data: FactoryData[] = []
 
   useEffect(() => {
     fetchInfo();
@@ -22,6 +21,18 @@ const BarChartPage: FC = () => {
     setSelection(value);
     localStorage.setItem("selection", value);
   }, []);
+
+  const getData = useCallback((selection: Product) => {
+    let count = 1;
+    const arr = [];
+
+    while (count <= BAR.COUNT) {
+      arr.push(getSortedBy(selection, count));
+      count++;
+    }
+
+    return arr;
+  }, [getSortedBy]);
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
@@ -45,7 +56,7 @@ const BarChartPage: FC = () => {
             <Observer>
               {() => (
                 <BarChart
-                  data={getSortedBy(selection)}
+                  data={getData(selection)}
                   barWidth={BAR.WIDTH}
                   barCount={BAR.COUNT}
                   barGap={BAR.GAP}
