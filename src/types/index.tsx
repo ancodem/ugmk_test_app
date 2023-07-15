@@ -2,9 +2,17 @@ import { MONTHS } from "../constants";
 
 export type Product = `product${1 | 2 | 3}`;
 
+export type Month = typeof MONTHS[number];
+
+export type VictoryDatum = {
+  datum: { _xName: Month;
+  factoryId: number }
+};
+
 export type FactoryAxisData = {
-  y: number,
-  x: typeof MONTHS[number],
+  y: number;
+  x: Month;
+  factoryId: number;
 }
 
 export type FactoryData = {
