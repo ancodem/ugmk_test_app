@@ -1,9 +1,7 @@
 import {
   action,
-  IObservableValue,
   makeObservable,
   observable,
-  toJS,
 } from "mobx";
 import { MONTHS } from "../constants";
 import { FactoryAxisData, FactoryData, Product } from "../types";

@@ -1,6 +1,6 @@
 import { observer } from "mobx-react";
 import React, { FC, SyntheticEvent } from "react";
-import { VictoryBar, VictoryChart, VictoryContainer, VictoryGroup, VictoryLegend } from "victory";
+import { VictoryBar, VictoryChart, VictoryContainer, VictoryGroup } from "victory";
 import { FactoryAxisData, VictoryDatum } from "../../types";
 
 type Props = {
@@ -23,44 +23,42 @@ const BarChart: FC<Props> = ({
   height = 200,
 }) => {
   return (
-    <>
-      <VictoryChart
-        domainPadding={20}
-        containerComponent={<VictoryContainer responsive />}
-        height={height}
+    <VictoryChart
+      domainPadding={20}
+      containerComponent={<VictoryContainer responsive />}
+      height={height}
+    >
+      <VictoryGroup
+        style={{
+          labels: { fontSize: "10px" },
+        }}
+        colorScale={colors}
+        offset={barGap}
       >
-        <VictoryGroup
-          style={{
-            labels: { fontSize: "10px" },
-          }}
-          colorScale={colors}
-          offset={barGap}
-        >
-          {[...Array.from(Array(barCount).keys())].map((_, index) => (
-            <VictoryBar
-              key={index}
-              labels={({ datum }) => datum.factory_id}
-              barWidth={barWidth}
-              data={data[index]}
-              style={{
-                data: {
-                  cursor: "pointer"
-                }
-              }}
-              events={[
-                {
-                  childName: "data",
-                  target: "data",
-                  eventHandlers: {
-                    onClick: onClick,
-                  },
+        {[...Array.from(Array(barCount).keys())].map((_, index) => (
+          <VictoryBar
+            key={index}
+            labels={({ datum }) => datum.factory_id}
+            barWidth={barWidth}
+            data={data[index]}
+            style={{
+              data: {
+                cursor: "pointer"
+              }
+            }}
+            events={[
+              {
+                childName: "data",
+                target: "data",
+                eventHandlers: {
+                  onClick: onClick,
                 },
-              ]}
-            />
-          ))}
-        </VictoryGroup>
-      </VictoryChart>
-    </>
+              },
+            ]}
+          />
+        ))}
+      </VictoryGroup>
+    </VictoryChart>
   )
 }
 
