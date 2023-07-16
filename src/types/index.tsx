@@ -9,14 +9,18 @@ export enum Status {
   Empty = "Empty"
 }
 
+export type PieChartData = { y: number };
+
 export type Params = {
   monthNumber: `${number}`;
   factoryId: `${number}`;
 }
 
 export type VictoryDatum = {
-  datum: { xName: Month;
-  factoryId: number }
+  datum: {
+    xName: Month;
+    factoryId: number
+  }
 };
 
 export type FactoryAxisData = {
@@ -34,4 +38,3 @@ export type FactoryData = {
   product2: number;
   product3: number;
 };
-

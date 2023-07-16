@@ -15,7 +15,7 @@ const BarChartPage: FC = () => {
   const navigate = useNavigate();
 
   const [selection, setSelection] = useState<Product>(getStoredSelection());
-  const { fetchInfo, getSortedBy } = Store;
+  const { fetchInfo, getBarChartFor: getSortedBy } = Store;
 
   useEffect(() => {
     fetchInfo();

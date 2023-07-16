@@ -1,11 +1,11 @@
-import { Statistic } from "antd";
 import {
   action,
   makeObservable,
   observable,
 } from "mobx";
 import { MONTHS } from "../constants";
-import { FactoryAxisData, FactoryData, Product, Status } from "../types";
+import { FactoryAxisData, FactoryData, PieChartData, Product, Status } from "../types";
+import { convertToTons } from "../utils";
 
 const API = {
   fetch: `${process.env.REACT_APP_API_URL}/products`
@@ -22,8 +22,27 @@ class BaseStore {
     });
   }
 
+  public getPieChartFor = (factoryId: number, month: number, productCount: number = 3): PieChartData[] => {
+    const filtered = this.data.filter(i => i.factory_id === factoryId && +i.date.split("/")[1] === month);
 
-  public getSortedBy = (type: Product, id: number) => {
+    const result = filtered.reduce(
+      (acc, data) => {
+        acc[0].y += convertToTons(data.product1);
+        acc[1].y += convertToTons(data.product2);
+        acc[2].y += convertToTons(data.product3);
+        return acc;
+      },
+      [{ y: 0 }, { y: 0 }, { y: 0 }]
+    );
+
+    for (let i = 0; i < result.length; i++) {
+      result[i].y = Math.round(result[i].y);
+    }
+
+    return result;
+  }
+
+  public getBarChartFor = (type: Product, id: number) => {
     const arr: FactoryAxisData[] = Array.from(
       { length: 12, },
       (_, index) => ({ y: 0, x: MONTHS[index], factoryId: id })
@@ -36,7 +55,7 @@ class BaseStore {
 
       arr[index] = {
         ...arr[index],
-        y: arr[index].y + filtered[i][type] / 1000,
+        y: arr[index].y + convertToTons(filtered[i][type]),
       }
     }
 
