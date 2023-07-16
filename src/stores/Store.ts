@@ -42,6 +42,10 @@ class BaseStore {
     return result;
   }
 
+  private sumAllProducts = (data: FactoryData) => {
+    return data.product1 + data.product2 + data.product3;
+  }
+
   public getBarChartFor = (type: Product, id: number) => {
     const arr: FactoryAxisData[] = Array.from(
       { length: 12, },
@@ -53,9 +57,16 @@ class BaseStore {
     for (let i = 0; i < filtered.length; i++) {
       const index = +filtered[i].date.split("/")[1] - 1;
 
-      arr[index] = {
-        ...arr[index],
-        y: arr[index].y + convertToTons(filtered[i][type]),
+      if (type === "all") {
+        arr[index] = {
+          ...arr[index],
+          y: arr[index].y + convertToTons(this.sumAllProducts(filtered[i])),
+        }
+      } else {
+        arr[index] = {
+          ...arr[index],
+          y: arr[index].y + convertToTons(filtered[i][type]),
+        }
       }
     }
 
@@ -79,7 +90,7 @@ class BaseStore {
       this.validateAndStore(info);
       this.status = Status.Full;
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 }

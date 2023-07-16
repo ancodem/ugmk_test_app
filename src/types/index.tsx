@@ -1,6 +1,6 @@
 import { MONTHS } from "../constants";
 
-export type Product = `product${1 | 2 | 3}`;
+export type Product = `product${1 | 2 | 3}` | "all";
 
 export type Month = typeof MONTHS[number];
 
