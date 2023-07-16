@@ -7,6 +7,8 @@ export const OPTIONS: { value: Product; label: string }[] = [
   { value: "all", label: "Все продукты" },
 ];
 
+export const PIE_CHART_COLORS = ["green", "orange", "red"];
+
 export const BAR = {
   WIDTH: 10,
   HEIGHT: 250,
