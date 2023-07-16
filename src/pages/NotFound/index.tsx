@@ -15,10 +15,12 @@ const PageNotFound: FC = () => {
   return (
     <Layout style={{ minHeight: "100vh", maxHeight: "100%" }}>
       <Row style={{ width: "80%", marginTop: "20px" }}>
-        <Col span={16} offset={6} >
-          <Layout.Content style={{ margin: "0px auto", minWidth: "100%", padding: 0 }}>
+        <Col span={16} offset={6}>
+          <Layout.Content
+            style={{ margin: "0px auto", minWidth: "100%", padding: 0 }}
+          >
             <Row>
-              <Col span={24} offset={5} >
+              <Col span={24} offset={5}>
                 <Typography.Title level={1}>
                   Страница не найдена :(
                 </Typography.Title>
@@ -28,7 +30,7 @@ const PageNotFound: FC = () => {
         </Col>
       </Row>
     </Layout>
-  )
-}
+  );
+};
 
 export default PageNotFound;

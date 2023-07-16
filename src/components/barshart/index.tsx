@@ -1,6 +1,11 @@
 import { observer } from "mobx-react";
 import React, { FC, SyntheticEvent } from "react";
-import { VictoryBar, VictoryChart, VictoryContainer, VictoryGroup } from "victory";
+import {
+  VictoryBar,
+  VictoryChart,
+  VictoryContainer,
+  VictoryGroup,
+} from "victory";
 import { BAR } from "../../constants";
 import { FactoryAxisData, VictoryDatum } from "../../types";
 
@@ -13,7 +18,7 @@ type Props = {
    */
   onClick: <T extends VictoryDatum>(_e: SyntheticEvent, data: T) => void;
   /** данные для построения чарта {x, y, factoryId} */
-  data: FactoryAxisData[][]
+  data: FactoryAxisData[][];
   /** цвета для колонок */
   colors?: string[];
   /** ширина колонок */
@@ -24,7 +29,7 @@ type Props = {
   barGap?: number;
   /** высота всего чарта */
   height?: number;
-}
+};
 
 const BarChart: FC<Props> = ({
   data,
@@ -56,8 +61,8 @@ const BarChart: FC<Props> = ({
             data={data[index]}
             style={{
               data: {
-                cursor: "pointer"
-              }
+                cursor: "pointer",
+              },
             }}
             events={[
               {
@@ -72,7 +77,7 @@ const BarChart: FC<Props> = ({
         ))}
       </VictoryGroup>
     </VictoryChart>
-  )
-}
+  );
+};
 
 export default observer(BarChart);

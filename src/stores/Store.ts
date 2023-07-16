@@ -1,16 +1,12 @@
-import {
-  action,
-  makeObservable,
-  observable,
-} from "mobx";
+import { action, makeObservable, observable } from "mobx";
 import { MONTHS } from "../constants";
 import { Status } from "../enums";
 import { FactoryAxisData, FactoryData, PieChartData, Product } from "../types";
 import { convertToTons } from "../utils";
 
 const API = {
-  fetch: `${process.env.REACT_APP_API_URL}/products`
-}
+  fetch: `${process.env.REACT_APP_API_URL}/products`,
+};
 
 class BaseStore {
   data: FactoryData[] = observable.array([]);
@@ -23,8 +19,14 @@ class BaseStore {
     });
   }
 
-  public getPieChartFor = (factoryId: number, month: number, productCount: number = 3): PieChartData[] => {
-    const filtered = this.data.filter(i => i.factory_id === factoryId && +i.date.split("/")[1] === month);
+  public getPieChartFor = (
+    factoryId: number,
+    month: number,
+    productCount: number = 3
+  ): PieChartData[] => {
+    const filtered = this.data.filter(
+      (i) => i.factory_id === factoryId && +i.date.split("/")[1] === month
+    );
 
     const result = filtered.reduce(
       (acc, data) => {
@@ -41,19 +43,20 @@ class BaseStore {
     }
 
     return result;
-  }
+  };
 
   private sumAllProducts = (data: FactoryData) => {
     return data.product1 + data.product2 + data.product3;
-  }
+  };
 
   public getBarChartFor = (type: Product, id: number) => {
-    const arr: FactoryAxisData[] = Array.from(
-      { length: 12, },
-      (_, index) => ({ y: 0, x: MONTHS[index], factoryId: id })
-    );
+    const arr: FactoryAxisData[] = Array.from({ length: 12 }, (_, index) => ({
+      y: 0,
+      x: MONTHS[index],
+      factoryId: id,
+    }));
 
-    const filtered = this.data.filter(i => i.factory_id === id)
+    const filtered = this.data.filter((i) => i.factory_id === id);
 
     for (let i = 0; i < filtered.length; i++) {
       const index = +filtered[i].date.split("/")[1] - 1;
@@ -62,17 +65,17 @@ class BaseStore {
         arr[index] = {
           ...arr[index],
           y: arr[index].y + convertToTons(this.sumAllProducts(filtered[i])),
-        }
+        };
       } else {
         arr[index] = {
           ...arr[index],
           y: arr[index].y + convertToTons(filtered[i][type]),
-        }
+        };
       }
     }
 
-    return arr
-  }
+    return arr;
+  };
 
   private validateAndStore = (arr: FactoryData[]) => {
     for (let i = 0; i < arr.length; i++) {
@@ -80,7 +83,7 @@ class BaseStore {
         this.data.push(arr[i]);
       }
     }
-  }
+  };
 
   public fetchInfo = async () => {
     if (this.status === Status.Full) return;

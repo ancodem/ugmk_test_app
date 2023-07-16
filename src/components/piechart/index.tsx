@@ -5,10 +5,9 @@ import { PieChartData } from "../../types";
 
 type Props = {
   data: PieChartData[];
-}
+};
 
 const PieChart: FC<Props> = ({ data }) => {
-
   return (
     <VictoryPie
       data={data}

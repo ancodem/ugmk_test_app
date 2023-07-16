@@ -6,5 +6,5 @@ export enum Routes {
 
 export enum Status {
   Full = "Filled",
-  Empty = "Empty"
+  Empty = "Empty",
 }
