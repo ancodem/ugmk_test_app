@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import BarChartPage from "../pages/Barchart";
+import PageNotFound from "../pages/NotFound";
 import PieChartPage from "../pages/PieChartPage";
 
 type Route = {
@@ -16,6 +17,10 @@ export default function useRoutes(): Route[] {
     {
       path: "/details/:factoryId/:monthNumber",
       element: <PieChartPage />,
+    },
+    {
+      path: "*",
+      element: <PageNotFound />,
     },
   ];
 }
