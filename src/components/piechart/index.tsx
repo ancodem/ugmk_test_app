@@ -12,16 +12,15 @@ const PieChart: FC<Props> = ({ data }) => {
 
   return (
     <VictoryPie
-      height={250}
-      width={300}
-      style={{
-        labels: { fontSize: "15px" },
-        data: { fontSize: "15px" }
-      }}
-      labels={({ datum }) => datum.y}
       data={data}
       colorScale={colors}
       labelComponent={<VictoryLabel style={{ fontSize: 8 }} />}
+      height={250}
+      width={300}
+      labels={({ datum }) => datum.y}
+      style={{
+        labels: { fontSize: 15 },
+      }}
     />
   );
 };

@@ -20,9 +20,9 @@ const PieChartPage: FC = () => {
     <Layout style={{ minHeight: "100vh", maxHeight: "100%" }}>
       <Row style={{ marginTop: "20px" }}>
         <Col span={15} offset={7} flex="start">
-            <Typography.Title level={3}>
-              {`Статистика по продукции фабрики ${FACTORY_LETTER[Number(factoryId) - 1]} за ${MONTHS[Number(monthNumber) - 1]}`}
-            </Typography.Title>
+          <Typography.Title level={3}>
+            {`Статистика по продукции фабрики ${FACTORY_LETTER[Number(factoryId) - 1]} за ${MONTHS[Number(monthNumber) - 1]}`}
+          </Typography.Title>
         </Col>
       </Row>
       <Row style={{ width: "80%", marginTop: "20px" }}>
