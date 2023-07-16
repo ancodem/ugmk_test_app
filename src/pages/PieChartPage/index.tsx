@@ -1,4 +1,4 @@
-import { Col, Layout, Row, Space, Typography } from "antd";
+import { Col, Layout, Row, Typography } from "antd";
 import React, { FC, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { FACTORY_LETTER, MONTHS } from "../../constants";
