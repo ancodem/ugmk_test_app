@@ -6,7 +6,7 @@ import { VictoryLegend } from "victory";
 import BarChart from "../../components/barshart";
 import { BAR, MONTHS, OPTIONS } from "../../constants";
 import Store from "../../stores/Store";
-import { Product,  VictoryDatum } from "../../types";
+import { Product, VictoryDatum } from "../../types";
 import { getStoredSelection } from "../../utils";
 
 const { Content } = Layout;
@@ -18,7 +18,7 @@ const BarChartPage: FC = () => {
   const { fetchInfo, getSortedBy } = Store;
 
   useEffect(() => {
-      fetchInfo();
+    fetchInfo();
   });
 
   const handleChange = useCallback((value: Product) => {
