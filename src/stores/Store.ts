@@ -4,7 +4,8 @@ import {
   observable,
 } from "mobx";
 import { MONTHS } from "../constants";
-import { FactoryAxisData, FactoryData, PieChartData, Product, Status } from "../types";
+import { Status } from "../enums";
+import { FactoryAxisData, FactoryData, PieChartData, Product } from "../types";
 import { convertToTons } from "../utils";
 
 const API = {

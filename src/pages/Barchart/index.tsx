@@ -54,8 +54,8 @@ const BarChartPage: FC = () => {
             <Typography> Фильтр по типу продукции </Typography>
             <Select
               style={{ width: 200 }}
-              defaultValue={selection}
               onChange={handleChange}
+              defaultValue={selection}
               options={OPTIONS}
             />
           </Space>
@@ -78,9 +78,12 @@ const BarChartPage: FC = () => {
                   orientation="horizontal"
                   height={40}
                   gutter={50}
-                  style={{ labels: { fontSize: 25 } }}
                   colorScale={BAR.COLORS}
-                  data={[{ name: "Фабрика А", symbol: { type: "square" } }, { name: "Фабрика Б", symbol: { type: "square" } }]}
+                  style={{ labels: { fontSize: 25 } }}
+                  data={[
+                    { name: "Фабрика А", symbol: { type: "square" } },
+                    { name: "Фабрика Б", symbol: { type: "square" } },
+                  ]}
                 />
               </Col>
             </Row>

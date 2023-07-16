@@ -39,9 +39,13 @@ const PieChartPage: FC = () => {
                   orientation="horizontal"
                   height={40}
                   gutter={10}
-                  style={{ labels: { fontSize: 20 } }}
                   colorScale={["green", "orange", "red"]}
-                  data={[{ name: "Продукт 1", symbol: { type: "square" } }, { name: "Продукт 2", symbol: { type: "square" } }, { name: "Продукт 3", symbol: { type: "square" } }]}
+                  style={{ labels: { fontSize: 20 } }}
+                  data={[
+                    { name: "Продукт 1", symbol: { type: "square" } },
+                    { name: "Продукт 2", symbol: { type: "square" } },
+                    { name: "Продукт 3", symbol: { type: "square" } }
+                  ]}
                 />
               </Col>
             </Row>
