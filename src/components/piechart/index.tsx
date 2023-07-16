@@ -15,7 +15,7 @@ const PieChart: FC<Props> = ({ data }) => {
       colorScale={PIE_CHART_COLORS}
       labelComponent={<VictoryLabel style={{ fontSize: 8 }} />}
       height={250}
-      width={300}
+      width={350}
       labels={({ datum }) => datum.y}
       style={{
         labels: { fontSize: 15 },

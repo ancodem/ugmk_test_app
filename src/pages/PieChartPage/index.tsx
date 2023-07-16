@@ -26,14 +26,14 @@ const PieChartPage: FC = () => {
         </Col>
       </Row>
       <Row style={{ width: "80%", marginTop: "20px" }}>
-        <Col span={20} offset={5} >
-          <Layout.Content style={{ margin: "20px auto", minHeight: "80%", minWidth: "100%", padding: 0 }}>
+        <Col span={16} offset={6} >
+          <Layout.Content style={{ margin: "0px auto", minWidth: "100%", padding: 0 }}>
             <Observer>
               {() => (
                 <PieChart data={getPieChartFor(Number(factoryId), Number(monthNumber))} />
               )}
             </Observer>
-            <Row style={{ position: "relative", top: "-25px" }}>
+            <Row style={{ position: "relative", top: "-35px", margin: 0 }}>
               <Col span={12} offset={7} >
                 <VictoryLegend
                   orientation="horizontal"
