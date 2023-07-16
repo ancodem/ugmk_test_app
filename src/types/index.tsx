@@ -9,6 +9,11 @@ export enum Status {
   Empty = "Empty"
 }
 
+export type Params = {
+  monthNumber: `${number}`;
+  factoryId: `${number}`;
+}
+
 export type VictoryDatum = {
   datum: { xName: Month;
   factoryId: number }
