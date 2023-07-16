@@ -1,5 +1,5 @@
 import { Col, Layout, Row, Select, Space, Typography } from "antd";
-import { observer, Observer } from "mobx-react";
+import { Observer } from "mobx-react";
 import React, { FC, SyntheticEvent, useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { VictoryLegend } from "victory";
@@ -8,8 +8,6 @@ import { BAR, MONTHS, OPTIONS } from "../../constants";
 import Store from "../../stores/Store";
 import { Product, VictoryDatum } from "../../types";
 import { getStoredSelection } from "../../utils";
-
-const { Content } = Layout;
 
 const BarChartPage: FC = () => {
   const navigate = useNavigate();
@@ -65,7 +63,7 @@ const BarChartPage: FC = () => {
       </Row>
       <Row style={{ width: "80%", marginTop: "20px" }}>
         <Col span={20} offset={5} >
-          <Content style={{ margin: "20px auto", minHeight: "80%", minWidth: "100%", border: "solid 1px black", padding: 0, borderRadius: "10px" }}>
+          <Layout.Content style={{ margin: "20px auto", minHeight: "80%", minWidth: "100%", border: "solid 1px black", padding: 0, borderRadius: "10px" }}>
             <Observer>
               {() => (
                 <BarChart
@@ -91,11 +89,11 @@ const BarChartPage: FC = () => {
                 />
               </Col>
             </Row>
-          </Content>
+          </Layout.Content>
         </Col>
       </Row>
     </Layout>
   )
 }
 
-export default observer(BarChartPage);
+export default BarChartPage;
