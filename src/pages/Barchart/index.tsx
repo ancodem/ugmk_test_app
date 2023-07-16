@@ -42,7 +42,7 @@ const BarChartPage: FC = () => {
     <T extends VictoryDatum>(_e: SyntheticEvent, { datum }: T) => {
       if (!datum) return;
 
-      const { factoryId, _xName: month } = datum;
+      const { factoryId, xName: month } = datum;
       const monthAsNumber = MONTHS.findIndex(elem => elem === month) + 1;
 
       navigate(`/details/${factoryId}/${monthAsNumber}`);

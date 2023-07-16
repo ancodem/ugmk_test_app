@@ -10,7 +10,7 @@ export enum Status {
 }
 
 export type VictoryDatum = {
-  datum: { _xName: Month;
+  datum: { xName: Month;
   factoryId: number }
 };
 
