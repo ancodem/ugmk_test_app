@@ -1,26 +1,20 @@
 import { Col, Layout, Row, Typography } from "antd";
 import React, { FC, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { FACTORY_LETTER, MONTHS } from "../../constants";
 import { Params } from "../../types";
 import PieChart from "../../components/piechart"
 import Store from "../../stores/Store";
 import { Observer } from "mobx-react";
 import { VictoryLegend } from "victory";
-import { invalidPieParams } from "../../utils";
 
 const PieChartPage: FC = () => {
   const { factoryId, monthNumber } = useParams<Params>();
-  const navigate = useNavigate();
   const { getPieChartFor, fetchInfo } = Store;
 
   useEffect(() => {
     fetchInfo();
   });
-
-  if (invalidPieParams(Number(factoryId), Number(monthNumber))) {
-    navigate("/404");
-  }
 
   return (
     <Layout style={{ minHeight: "100vh", maxHeight: "100%" }}>
