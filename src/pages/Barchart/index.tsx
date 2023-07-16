@@ -69,11 +69,6 @@ const BarChartPage: FC = () => {
                 <BarChart
                   onClick={handleBarClick}
                   data={getData(selection)}
-                  height={BAR.HEIGHT}
-                  barWidth={BAR.WIDTH}
-                  barCount={BAR.COUNT}
-                  barGap={BAR.GAP}
-                  colors={BAR.COLORS}
                 />
               )}
             </Observer>
