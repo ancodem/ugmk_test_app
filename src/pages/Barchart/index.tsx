@@ -51,10 +51,11 @@ const BarChartPage: FC = () => {
   return (
     <Layout style={{ minHeight: "100vh", maxHeight: "100%" }}>
       <Row style={{ marginTop: "20px" }}>
-        <Col span={20} offset={4} flex="start">
-          <Space style={{ border: "solid 1px black", padding: "10px", borderRadius: "10px", width: "80%" }}>
+        <Col span={20} offset={4}>
+          <Space style={{ display: "felx", justifyContent: "end", border: "solid 1px black", padding: "10px", borderRadius: "10px", width: "80%" }}>
             <Typography> Фильтр по типу продукции </Typography>
             <Select
+              style={{ width: 200 }}
               defaultValue={selection}
               onChange={handleChange}
               options={OPTIONS}
