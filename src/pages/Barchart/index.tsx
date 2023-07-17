@@ -109,8 +109,7 @@ const BarChartPage: FC = () => {
             <Row style={{ position: "relative", top: "-25px" }}>
               <Col span={12} offset={7}>
                 <Suspense
-                  fallback={
-                    <Skeleton.Input size="large" style={{ width: 300 }} />
+                  fallback={ <div style={{fontSize: 25}}>Фбрика А Фабрика Б</div>
                   }
                 >
                   <VictoryLegend
