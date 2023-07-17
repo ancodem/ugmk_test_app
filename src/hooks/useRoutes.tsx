@@ -1,27 +1,54 @@
-import { ReactNode } from "react";
+import { Skeleton, Spin } from "antd";
+import { lazy, ReactNode, Suspense } from "react";
+import Loader from "../components/Loader";
 import { Routes } from "../enums";
 import BarChartPage from "../pages/Barchart";
-import PageNotFound from "../pages/NotFound";
-import PieChartPage from "../pages/PieChartPage";
+
+const PageNotFound = lazy(
+  () =>
+    import(
+      /* webpackChunkName: "PieChartPage" */
+      "../pages/PieChartPage"
+    )
+);
+
+const PieChartPage = lazy(
+  () =>
+    import(
+      /* webpackChunkName: "PieChartPage" */
+      "../pages/PieChartPage"
+    )
+);
 
 type Route = {
-  path: string;
+  path: Routes;
   element: ReactNode;
 };
 
+const STATIS: Route[] = [
+  {
+    path: Routes.BarChart,
+    element: <BarChartPage />,
+  },
+  {
+    path: Routes.PieChart,
+    element: (
+      <Suspense fallback={<Loader />}>
+        <PieChartPage />
+      </Suspense>
+    ),
+  },
+  {
+    path: Routes.NotFound,
+    element: (
+      <Suspense fallback={<Loader />}>
+        <PageNotFound />
+      </Suspense>
+    ),
+  },
+];
+
 export default function useRoutes(): Route[] {
-  return [
-    {
-      path: Routes.BarChart,
-      element: <BarChartPage />,
-    },
-    {
-      path: Routes.PieChart,
-      element: <PieChartPage />,
-    },
-    {
-      path: Routes.NotFound,
-      element: <PageNotFound />,
-    },
-  ];
+  /* in case there are more routes that demand dynamic info, they can be put here*/
+  return STATIS;
 }

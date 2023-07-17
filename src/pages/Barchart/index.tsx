@@ -1,19 +1,27 @@
-import { Col, Layout, Row, Select, Space, Typography } from "antd";
+import { Col, Layout, Row, Select, Skeleton, Space, Typography } from "antd";
 import { Observer } from "mobx-react";
 import React, {
   FC,
+  lazy,
+  Suspense,
   SyntheticEvent,
   useCallback,
   useEffect,
   useState,
 } from "react";
 import { useNavigate } from "react-router-dom";
-import { VictoryLegend } from "victory";
 import BarChart from "../../components/barshart";
 import { BAR, MONTHS, OPTIONS } from "../../constants";
 import Store from "../../stores/Store";
 import { Product, VictoryDatum } from "../../types";
 import { getStoredSelection } from "../../utils";
+
+const VictoryLegend = lazy(() =>
+  import(
+    /* webpackChunkName: "legend" */
+    "victory"
+  ).then((module) => ({ default: module.VictoryLegend }))
+);
 
 const BarChartPage: FC = () => {
   const navigate = useNavigate();
@@ -100,17 +108,23 @@ const BarChartPage: FC = () => {
             </Observer>
             <Row style={{ position: "relative", top: "-25px" }}>
               <Col span={12} offset={7}>
-                <VictoryLegend
-                  orientation="horizontal"
-                  height={40}
-                  gutter={50}
-                  colorScale={BAR.COLORS}
-                  style={{ labels: { fontSize: 25 } }}
-                  data={[
-                    { name: "Фабрика А", symbol: { type: "square" } },
-                    { name: "Фабрика Б", symbol: { type: "square" } },
-                  ]}
-                />
+                <Suspense
+                  fallback={
+                    <Skeleton.Input size="large" style={{ width: 300 }} />
+                  }
+                >
+                  <VictoryLegend
+                    orientation="horizontal"
+                    height={40}
+                    gutter={50}
+                    colorScale={BAR.COLORS}
+                    style={{ labels: { fontSize: 25 } }}
+                    data={[
+                      { name: "Фабрика А", symbol: { type: "square" } },
+                      { name: "Фабрика Б", symbol: { type: "square" } },
+                    ]}
+                  />
+                </Suspense>
               </Col>
             </Row>
           </Layout.Content>
